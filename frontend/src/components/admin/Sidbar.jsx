@@ -57,7 +57,7 @@ export default function Sidbar() {
         <p className="px-3 py-2 cursor-pointer rounded hover:bg-gray-700">⭐ Reviews</p>
         <p className="px-3 py-2 cursor-pointer rounded hover:bg-gray-700">📈 Reports</p>
 
-        <Link to={"/login"}>
+        <Link to={"/login"} onClick={() => localStorage.removeItem("token")}>
           <p className="mt-10 text-xl text-gray-400 hover:text-red-300 cursor-pointer flex items-center gap-2">
             <RxExit />
             Logout

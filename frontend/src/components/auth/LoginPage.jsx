@@ -11,10 +11,13 @@ export default function LoginPage() {
   const navigate = useNavigate();
   const handleLogin = async () => {
     try {
-      await axios.post("/login", {
+      const response = await axios.post("/login", {
         username,
         password,
       });
+      if (response.data?.token) {
+        localStorage.setItem("token", response.data.token);
+      }
       navigate("/admin/dashboard");
     } catch (error) {
       alert(error.response?.data?.message || "Login failed");

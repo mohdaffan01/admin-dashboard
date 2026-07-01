@@ -40,7 +40,7 @@ export const createUser = async (req, res, next) => {
             confirmPassword: data.confirmPassword,
             role: data.role
         })
-        const token = jwt.sign({ id: user._id }, process.env.SECRET, { expiresIn: "7d" });
+                const token = jwt.sign({ id: user._id }, process.env.SECRET, { expiresIn: "7d" });
         res.cookie("token", token, {
             httpOnly: true,
             secure: true,
@@ -49,7 +49,8 @@ export const createUser = async (req, res, next) => {
         }).status(201).json({
             user: user,
             success: true,
-            message: "User created successfully"
+            message: "User created successfully",
+            token: token
         })
 
     } catch (error) {
@@ -117,7 +118,7 @@ export const login = async (req, res, next) => {
                 message: "Admin access only!"
             })
         }
-        const token = jwt.sign({ id: user._id }, process.env.SECRET, { expiresIn: "7d" });
+                const token = jwt.sign({ id: user._id }, process.env.SECRET, { expiresIn: "7d" });
         //  Success
         return res.cookie("token", token, {
             httpOnly: true,
@@ -127,6 +128,7 @@ export const login = async (req, res, next) => {
         }).status(200).json({
             success: true,
             message: "Login successfully!",
+            token: token
         });
 
     } catch (error) {
